@@ -66,16 +66,22 @@ UserSchema.method({
 
 UserSchema.post('find', function(users) {
   users.forEach(user => {
-    userAvatarPath(user);
+    if(user) {
+      userAvatarPath(user);
+    }
   });
 });
 
 UserSchema.post('findOne', function(user) {
-  userAvatarPath(user);
+  if(user) {
+    userAvatarPath(user);
+  }
 });
 
 UserSchema.post('findById', function(user) {
-  userAvatarPath(user);
+  if(user) {
+    userAvatarPath(user);
+  }
 });
 
 function userAvatarPath(user) {
