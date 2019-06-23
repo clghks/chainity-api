@@ -128,11 +128,6 @@ function update(req, res, next) {
     user.status = req.body.status;
   }
 
-  if (user.avatar) {
-    user.avatar = user.avatar.replace(config.image.uri + '/v1/images/','');
-    user.thumbnail = user.thumbnail.replace(config.image.uri + '/v1/images/', '');
-  }
-
   User.update({_id: user.id}, user)
     .then(savedUser => res.json(savedUser))
     .catch(e => next(e));
