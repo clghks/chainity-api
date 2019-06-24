@@ -1,6 +1,6 @@
 {
   "name": "chainity-api",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "private": true,
   "scripts": {
     "start": "pm2-dev start ecosystem.config.js",

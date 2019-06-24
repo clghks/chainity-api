@@ -85,7 +85,7 @@ UserSchema.post('findById', function(user) {
 });
 
 function userAvatarPath(user) {
-  if (user.avatar != undefined) {
+  if (user != undefined && user.avatar != undefined) {
     user.avatar = imageUrl + user.avatar;
     user.thumbnail = imageUrl + user.thumbnail;
   }
