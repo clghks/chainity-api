@@ -66,20 +66,26 @@ UserSchema.method({
 
 UserSchema.post('find', function(users) {
   users.forEach(user => {
-    userAvatarPath(user);
+    if(user) {
+      userAvatarPath(user);
+    }
   });
 });
 
 UserSchema.post('findOne', function(user) {
-  userAvatarPath(user);
+  if(user) {
+    userAvatarPath(user);
+  }
 });
 
 UserSchema.post('findById', function(user) {
-  userAvatarPath(user);
+  if(user) {
+    userAvatarPath(user);
+  }
 });
 
 function userAvatarPath(user) {
-  if (user.avatar != undefined) {
+  if (user != undefined && user.avatar != undefined) {
     user.avatar = imageUrl + user.avatar;
     user.thumbnail = imageUrl + user.thumbnail;
   }
