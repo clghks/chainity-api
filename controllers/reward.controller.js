@@ -53,10 +53,10 @@ function load(req, res, next, id) {
  */
 function create(req, res, next) {
   const reward = new Reward({
-    event: req.body.event,
+    event: req.event._id,
     rewardedUser: req.body.rewardedUser,
-    createdBy: req.decoded._id,
     tokens: req.body.tokens,
+    createdBy: req.decoded._id,
     createdAt: Date.now()
   });
 

@@ -7,7 +7,6 @@ var paramValidation = require('../../config/param-validation'),
 const router = express.Router();
 
 router.route('/')
-  .get(rewardCtrl.list)
-  .post(rewardCtrl.create);
+  .get(rewardCtrl.list);
 
 module.exports = router;

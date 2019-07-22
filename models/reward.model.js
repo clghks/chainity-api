@@ -30,7 +30,7 @@ const RewardSchema = new mongoose.Schema({
   },
   tokens: {
     type: Number,
-    required: false
+    required: true
   },
   tx: {
     type: String,
