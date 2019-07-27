@@ -28,7 +28,8 @@ router.route('/:eventId/rewards')
   .get((req, res, next) => {
     req.query.q = { 'event': req.event._id };
     next();
-  }, rewardCtrl.list);
+  }, rewardCtrl.list)
+  .post(rewardCtrl.create);
 
 router.route('/:eventId/participations/:participationId')
   .delete(eventCtrl.removeParticipation);
