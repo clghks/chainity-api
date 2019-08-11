@@ -73,7 +73,7 @@ RewardSchema.statics = {
    * @param {number} limit - Limit number of rewards to be returned.
    * @returns {Promise<Reward[]>}
    */
-  list({ limit = 0, offset = 0 } = {}) {
+  list({ limit = 0, offset = 0, q = {} } = {}) {
     return this.find()
     //   .populate('createdBy')
       .sort({ createdAt: -1 })
