@@ -11,7 +11,7 @@ var ObjectID = require('mongodb').ObjectID
 const RewardSchema = new mongoose.Schema({
   event: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Issues',
+    ref: 'Event',
     required: true
   },
   rewardedUser: {
@@ -74,7 +74,7 @@ RewardSchema.statics = {
    * @returns {Promise<Reward[]>}
    */
   list({ limit = 0, offset = 0, q = {} } = {}) {
-    return this.find()
+    return this.find(q)
     //   .populate('createdBy')
       .sort({ createdAt: -1 })
       .limit(+limit)
