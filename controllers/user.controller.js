@@ -128,18 +128,11 @@ function update(req, res, next) {
     user.status = req.body.status;
   }
 
-  if (user.avatar) {
-    user.avatar = user.avatar.replace(config.image.uri + '/v1/images/','');
-    user.thumbnail = user.thumbnail.replace(config.image.uri + '/v1/images/', '');
-  }
-
   User.update({_id: user.id}, {
       "$set": {
         "name": user.name,
         "role": user.role,
-        "status": user.status,
-        "avatar": user.avatar,
-        "thumbnail": user.thumbnail
+        "status": user.status
       }
     })
     .then(savedUser => res.json(savedUser))
@@ -210,7 +203,12 @@ function uploadImage(req, res, next) {
         const user = new User(req.user);
         user.avatar = req.file.path.replace(config.image.uploadPath,'');
         user.thumbnail = files[0].dstPath.replace(config.image.uploadPath, '');
-        User.update({_id: user.id}, user)
+        User.update({_id: user.id}, {
+          "$set": {
+            "avatar": user.avatar,
+            "thumbnail": user.thumbnail
+          }
+        })
           .then(() => res.json({ user }))
           .catch(e => next(e));
       }).catch(function(e) {
