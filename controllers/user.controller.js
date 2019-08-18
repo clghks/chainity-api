@@ -117,7 +117,7 @@ function create(req, res, next) {
  * @returns {User}
  */
 function update(req, res, next) {
-  const user = new User(req.user);
+  const user = {};
   if (req.body.name) {
     user.name = req.body.name;
   }
@@ -127,13 +127,15 @@ function update(req, res, next) {
   if (req.body.status) {
     user.status = req.body.status;
   }
+  if (req.body.registeredAt) {
+    user.registeredAt = req.body.registeredAt;
+  }
+  if (req.body.keyStore) {
+    user.keyStore = req.body.keyStore;
+  }
 
   User.update({_id: user.id}, {
-      "$set": {
-        "name": user.name,
-        "role": user.role,
-        "status": user.status
-      }
+      "$set": user
     })
     .then(savedUser => res.json(savedUser))
     .catch(e => next(e));
