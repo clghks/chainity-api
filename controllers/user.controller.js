@@ -133,7 +133,15 @@ function update(req, res, next) {
     user.thumbnail = user.thumbnail.replace(config.image.uri + '/v1/images/', '');
   }
 
-  User.update({_id: user.id}, user)
+  User.update({_id: user.id}, {
+      "$set": {
+        "name": user.name,
+        "role": user.role,
+        "status": user.status,
+        "avatar": user.avatar,
+        "thumbnail": user.thumbnail
+      }
+    })
     .then(savedUser => res.json(savedUser))
     .catch(e => next(e));
 }
