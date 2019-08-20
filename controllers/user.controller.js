@@ -127,19 +127,22 @@ function update(req, res, next) {
   if (req.body.status) {
     user.status = req.body.status;
   }
-  if (req.body.registeredAt) {
-    user.registeredAt = req.body.registeredAt;
-  }
-  if (req.body.keyStore) {
-    user.keyStore = req.body.keyStore;
-  }
 
-  User.update({_id: user.id}, {
+  User.update({_id: req.user._id}, {
       "$set": user
     })
     .then(savedUser => res.json(savedUser))
     .catch(e => next(e));
 }
+
+function register(req, res, next) {
+  const user = new User(req.user);
+
+  User.update({_id: user.id}, user)
+    .then(savedUser => res.json(savedUser))
+    .catch(e => next(e));
+}
+
 
 /**
  * Get user list.
@@ -232,4 +235,4 @@ function getSystem(req, res) {
     .catch(e => next(e));;
 }
 
-module.exports = { load, get, create, update, list, remove, activeList, addressList, uploadImage, getSystem };
+module.exports = { load, get, create, update, list, remove, activeList, addressList, uploadImage, getSystem, register };
